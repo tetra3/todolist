@@ -19,6 +19,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import kr.or.connect.todo.domain.Todo;
 import kr.or.connect.todo.service.TodoService;
@@ -27,7 +28,7 @@ import kr.or.connect.todo.service.TodoService;
 
 @Repository
 public class TodoDao {
-	private NamedParameterJdbcTemplate jdbc;
+//	private NamedParameterJdbcTemplate jdbc;
 	private SimpleJdbcInsert insertAction;
 	
 	public TodoDao(DataSource dataSource) {
@@ -58,15 +59,18 @@ public class TodoDao {
 		Map<String, String> params = new HashMap<>();
 		params.put("TODO", request.getParameter("todo") );
 		params.put("DATE", finalTime);
-		jdbc.update(TodoSqls.INSERT_TODO, params);
+		jdbc.update(TodoSqls.INSERT_TODO, params);	
 		
 	}
 	
-	public void deletetodo(HttpServletRequest request) {
-		Map<String, String> params = new HashMap<>();
-		params.put("id", request.getParameter("id"));
+	private NamedParameterJdbcTemplate jdbc;
+	public void deletetodo(@RequestBody Map<String,String> request) {
+		Map<String, Integer> params = new HashMap<>();
+		Integer id = Integer.parseInt(request.get("id"));
+		System.out.println(id);
+		params.put("id", id);
 		jdbc.update(TodoSqls.DELETE_TODO, params);
-	}
+	}	
 	
 	
 }

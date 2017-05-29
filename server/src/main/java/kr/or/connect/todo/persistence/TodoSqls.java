@@ -2,7 +2,7 @@ package kr.or.connect.todo.persistence;
 
 public class TodoSqls {
 	static final String DELETE_TODO =
-			"DELETE FROM todo WHERE id= :id";
+			"DELETE FROM todo WHERE ID=:id";
 	
 	static final String SELECT_ALL =
 			"SELECT * FROM todo";

@@ -1,10 +1,12 @@
 package kr.or.connect.todo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import kr.or.connect.todo.domain.Todo;
 import kr.or.connect.todo.persistence.TodoDao;
@@ -25,7 +27,7 @@ public class TodoService {
 		dao.insertTodo(request);
 	}
 	
-	public void deleteTodo(HttpServletRequest request) {
+	public void deleteTodo(@RequestBody Map<String, String> request) {
 		dao.deletetodo(request);
 	}
 	
