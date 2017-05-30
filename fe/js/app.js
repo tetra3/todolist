@@ -13,8 +13,8 @@ $(document).ready(function() {
     }).done(function(result) {
       for(index in result) {
       $('.todo-list').prepend("<li data-id="+result[index].id+"><div><input class='toggle' type='checkbox'></input><label>"+result[index].todo+"</label><button class='destroy'></button></div><input class='edit' value='Create a TodoMVC template'></input></li>");
+        }
 
-          }
        });
 
     //Insert
@@ -41,51 +41,88 @@ $(document).ready(function() {
 
 });
 
+
+//Delete
+$(document).on("click",".destroy",function() {
+    var $this = $(this);
+    $.ajax({
+        url: "/api/todos",
+        type:"DELETE",
+        data: JSON.stringify({'id':$(this).parents("li").attr("data-id") }),
+        contentType : "application/json; charset=utf-8",
+
+        success:function(){
+            console.log("succes");
+            $this.parents("li").remove();
+
+        },
+        error:function() {
+            console.log("error");
+        }
+    });
+});
+
+
+
 $(document).on("change",".toggle",function() {
-    if( $(this).is(":checked") ) {
-        $(this).parents("li").addClass("completed");
+        if( $(this).is(":checked") ) {
+            $(this).parents("li").addClass("completed");
+        }
+        else{
+        $(this).parents("li").removeClass("completed");
+        }
+
+        // var toggleCheckObjs = $(".toggle[type='checkbox']");
+        // console.log(toggleCheckObjs.length);
+        // console.log($(".toggle[type='checkbox']:checked").length);
+        // if( toggleCheckObjs.length === $(".toggle[type='checkbox']:checked").length ) {
+        //     console.log("hi");
+        //     $('.toggle-all').attr("checked",true);
+        // }
+        // else if ( $(".toggle[type='checkbox']:checked").length < 4 )
+        // {
+        //     $('.toggle-all').attr("checked",false);
+        // }
+
+});
+
+
+$(document).on("click",".toggle-all",function() {
+    if( $('.toggle-all').prop("checked") ) {
+        $('.toggle:not(:checked)').click()
     }
     else{
-    $(this).parents("li").removeClass("completed");
+        $('.toggle').click();
     }
 });
 
 
-    //Delete
-    $(document).on("click",".destroy",function() {
-        var $this = $(this);
-        $.ajax({
-            url: "/api/todos",
-            type:"DELETE",
-            data: JSON.stringify({'id':$(this).parents("li").attr("data-id") }),
-            contentType : "application/json; charset=utf-8",
+$(document).on("click","a[href='#/active']",function() {
+    $('.toggle:checked').parents("li").hide();
+    $('.toggle:not(:checked)').parents("li").show();
+});
 
-            success:function(){
-                console.log("succes");
-                $this.parents("li").remove();
+$(document).on("click","a[href='#/completed']",function() {
+    $('.toggle:checked').parents("li").show();
+    $('.toggle:not(:checked)').parents("li").hide();
+});
 
-            },
-            error:function() {
-                console.log("error");
-            }
-        });
-    });
+$(document).on("click",".selected[href='#/']",function() {
+    $('.toggle:checked').parents("li").show();
+    $('.toggle:not(:checked)').parents("li").show();
+});
 
 
 
 
-
-
-
-// $('.todo-list').append("<li><div><input class='toggle' type='checkbox'></input><label>DB에서 불러오자</label><button class='destroy'></button></div><input class='edit' value='Create a TodoMVC template'></input></li>");
-
-
-
-// <li class="completed">
-//     <div class="view">
-//         <input class="toggle" type="checkbox" checked>
-//         <label>이걸 바꿔야 하나</label>
-//         <button class="destroy"></button>
-//     </div>
-//     <input class="edit" value="Create a TodoMVC template">
-// </li>
+// var toggleCheckObjs = $(".toggle[type='checkbox']");
+// console.log(toggleCheckObjs.length);
+// console.log($(".toggle[type='checkbox']:checked").length);
+// if( toggleCheckObjs.length === $(".toggle[type='checkbox']:checked").length ) {
+//     console.log("hi");
+//     $('.toggle-all').attr("checked",true);
+// }
+// else if ( $(".toggle[type='checkbox']:checked").length < 4 )
+// {
+//     $('.toggle-all').attr("checked",false);
+// }

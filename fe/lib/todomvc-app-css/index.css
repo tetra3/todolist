@@ -115,8 +115,12 @@ body {
 .toggle-all {
 	text-align: center;
 	border: none; /* Mobile Safari */
-	opacity: 0;
+	opacity: 1;
 	position: absolute;
+	top: -67px;
+	width:34px;
+	height:60px;
+	right:1px;
 }
 
 .toggle-all + label {
