@@ -28,7 +28,7 @@ import kr.or.connect.todo.service.TodoService;
 
 @Repository
 public class TodoDao {
-//	private NamedParameterJdbcTemplate jdbc;
+	private NamedParameterJdbcTemplate jdbc;
 	private SimpleJdbcInsert insertAction;
 	
 	public TodoDao(DataSource dataSource) {
@@ -63,14 +63,26 @@ public class TodoDao {
 		
 	}
 	
-	private NamedParameterJdbcTemplate jdbc;
-	public void deletetodo(@RequestBody Map<String,String> request) {
+	
+	public void deleteTodo(@RequestBody Map<String,String> request) {
 		Map<String, Integer> params = new HashMap<>();
 		Integer id = Integer.parseInt(request.get("id"));
 		System.out.println(id);
 		params.put("id", id);
 		jdbc.update(TodoSqls.DELETE_TODO, params);
-	}	
+	}
+	
+	public void putTodo(@RequestBody Map<String,String> request) {
+		Map<String, Integer> params = new HashMap<>();
+		Integer id = Integer.parseInt(request.get("id"));
+		Integer completed = Integer.parseInt(request.get("completed"));
+		System.out.println(id);
+		System.out.println(completed);
+		params.put("id",id);
+		params.put("completed",completed);
+		jdbc.update(TodoSqls.PUT_TODO, params);
+	}
+	
 	
 	
 }

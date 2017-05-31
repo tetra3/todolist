@@ -9,4 +9,8 @@ public class TodoSqls {
 	
 	static final String INSERT_TODO =
 			"INSERT INTO TODO VALUES(ID.nextval,:TODO,0,:DATE)";
+
+	static final String PUT_TODO =
+			"UPDATE TODO SET COMPLETED =:completed WHERE ID=:id";
+
 }

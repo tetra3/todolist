@@ -28,7 +28,10 @@ public class TodoService {
 	}
 	
 	public void deleteTodo(@RequestBody Map<String, String> request) {
-		dao.deletetodo(request);
+		dao.deleteTodo(request);
 	}
 	
+	public void putTodo(@RequestBody Map<String, String> request) {
+		dao.putTodo(request);
+	}
 }
