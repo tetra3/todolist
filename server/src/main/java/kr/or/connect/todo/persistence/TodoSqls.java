@@ -12,5 +12,8 @@ public class TodoSqls {
 
 	static final String PUT_TODO =
 			"UPDATE TODO SET COMPLETED =:completed WHERE ID=:id";
+	
+	static final String COMPLETED_TODO =
+			"DELETE FROM todo WHERE COMPLETED=1";
 
 }

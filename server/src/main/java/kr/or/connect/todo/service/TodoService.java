@@ -34,4 +34,8 @@ public class TodoService {
 	public void putTodo(@RequestBody Map<String, String> request) {
 		dao.putTodo(request);
 	}
+	
+	public void deleteCompletedTodo() {
+		dao.deleteCompletedTodo();
+	}
 }

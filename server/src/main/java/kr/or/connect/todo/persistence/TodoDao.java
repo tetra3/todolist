@@ -83,6 +83,11 @@ public class TodoDao {
 		jdbc.update(TodoSqls.PUT_TODO, params);
 	}
 	
+	public void deleteCompletedTodo() {
+		Map<String,Object> params = Collections.emptyMap();
+		jdbc.update(TodoSqls.COMPLETED_TODO, params);
+	}
+	
 	
 	
 }

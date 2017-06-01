@@ -1,9 +1,6 @@
 (function (window) {
 	'use strict';
-})(window);
-
-
-
+var count = 0;
 $(document).ready(function() {
 
     //List
@@ -12,43 +9,47 @@ $(document).ready(function() {
     type:"GET"
 
     }).done(function(result) {
-      for(index in result) {
-        if(result[index].completed === 1) {
-            $('.todo-list').prepend("<li data-id="+result[index].id+" class='completed'><div><input class='toggle' type='checkbox' checked></input><label>"+result[index].todo+"</label><button class='destroy'></button></div><input class='edit' value='Create a TodoMVC template'></input></li>");
-        }
-        else{
-            $('.todo-list').prepend("<li data-id="+result[index].id+"><div><input class='toggle' type='checkbox'></input><label>"+result[index].todo+"</label><button class='destroy'></button></div><input class='edit' value='Create a TodoMVC template'></input></li>");
-        }
 
-      }
+        for(var index in result) {
+            if(result[index].completed === 1) {
+                $('.todo-list').prepend("<li data-id="+result[index].id+" class='completed'><div><input class='toggle' type='checkbox' checked></input><label>"+result[index].todo+"</label><button class='destroy'></button></div><input class='edit' value='Create a TodoMVC template'></input></li>");
+            }
+            else{
+                $('.todo-list').prepend("<li data-id="+result[index].id+"><div><input class='toggle' type='checkbox'></input><label>"+result[index].todo+"</label><button class='destroy'></button></div><input class='edit' value='Create a TodoMVC template'></input></li>");
+                count = count + 1;
+            }
+            $('.todo-count>strong').text(count);
+        }
 
        });
 
     //Insert
     $('.new-todo').keypress(function(key) {
-        if( $('.new-todo').val() === ""){
-            alert("문자열을 입력해주세요");
-        }
-        else{
-            if (key.keyCode == 13) {
-            $.ajax({
-                url: "/api/todos",
-                type:"POST",
-                data:{'todo':$('.new-todo').val()}
 
-                }).done(function() {
-                    $('.new-todo').val('');
-                    $.ajax({
-                url: "/api/todos",
-                type:"GET",
-                }).done(function(result) {
-                  $('.todo-list').prepend("<li data-id="+result[result.length-1].id+"><div><input class='toggle' type='checkbox'></input><label>"+result[result.length-1].todo+"</label><button class='destroy'></button></div><input class='edit' value='Create a TodoMVC template'></input></li>");
 
-                  });
-                });
+        if (key.keyCode == 13) {
+            if( $('.new-todo').val() === ""){
+                  alert("문자열을 입력해주세요");
+            }
+            else{
+                $.ajax({
+                    url: "/api/todos",
+                    type:"POST",
+                    data:{'todo':$('.new-todo').val()}
+
+                    }).done(function() {
+                        $('.new-todo').val('');
+                        $.ajax({
+                            url: "/api/todos",
+                            type:"GET",
+                        }).done(function(result) {
+                             $('.todo-list').prepend("<li data-id="+result[result.length-1].id+"><div><input class='toggle' type='checkbox'></input><label>"+result[result.length-1].todo+"</label><button class='destroy'></button></div><input class='edit' value='Create a TodoMVC template'></input></li>");
+                             count = count + 1;
+                             $('.todo-count>strong').text(count);
+                          });
+                    });
             }
         }
-
     });
 
 
@@ -77,6 +78,22 @@ $(document).on("click",".destroy",function() {
     });
 });
 
+$(document).on("click",".clear-completed",function() {
+    $.ajax({
+        url: "/api/todos/all",
+        type:"DELETE",
+
+        success:function(){
+
+            $(".todo-list").children("li.completed").remove();
+
+        },
+        error:function() {
+            console.log("error");
+        }
+    });
+})
+
 
 
 $(document).on("change",".toggle",function() {
@@ -93,6 +110,8 @@ $(document).on("change",".toggle",function() {
 
                 success:function() {
                     here.parents("li").addClass("completed");
+                    count = count - 1;
+                    $('.todo-count>strong').text(count);
                 }
 
             });
@@ -107,6 +126,8 @@ $(document).on("change",".toggle",function() {
 
                 success:function() {
                      here.parents("li").removeClass("completed");
+                     count = count + 1;
+                     $('.todo-count>strong').text(count);
                 }
 
              });
@@ -173,15 +194,12 @@ $(document).on("click","a[href='#/']",function() {
 });
 
 
-var x = document.getElementsByClassName("toggle");
-var count = 0;
-console.log(x);
+// var x = document.getElementsByClassName("toggle");
+// var count = 0;
+// console.log(x);
 
-var h = $('.toggle');
-console.log(h);
-
-
-
+// var h = $('.toggle');
+// console.log(h);
 
 
 
@@ -196,3 +214,11 @@ console.log(h);
 // {
 //     $('.toggle-all').attr("checked",false);
 // }
+
+
+
+})(window);
+
+
+
+

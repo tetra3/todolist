@@ -43,7 +43,6 @@ public class TodoController {
 	void deleteTodo(@RequestBody Map<String, String> request) {
 		
 		service.deleteTodo(request);
-//		System.out.println(request.get("id"));
 	}
 	
 	@PutMapping
@@ -51,6 +50,12 @@ public class TodoController {
 		service.putTodo(request);
 	}
 	
+	@DeleteMapping("/all")
+	void deleteCompletedTodo() {
+		System.out.println("hi this is /all");
+		
+		service.deleteCompletedTodo();
+	}
 	
 	
 	
