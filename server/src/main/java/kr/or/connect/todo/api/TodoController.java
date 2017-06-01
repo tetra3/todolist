@@ -52,7 +52,6 @@ public class TodoController {
 	
 	@DeleteMapping("/all")
 	void deleteCompletedTodo() {
-		System.out.println("hi this is /all");
 		
 		service.deleteCompletedTodo();
 	}

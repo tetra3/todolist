@@ -67,7 +67,6 @@ public class TodoDao {
 	public void deleteTodo(@RequestBody Map<String,String> request) {
 		Map<String, Integer> params = new HashMap<>();
 		Integer id = Integer.parseInt(request.get("id"));
-		System.out.println(id);
 		params.put("id", id);
 		jdbc.update(TodoSqls.DELETE_TODO, params);
 	}
@@ -76,8 +75,6 @@ public class TodoDao {
 		Map<String, Integer> params = new HashMap<>();
 		Integer id = Integer.parseInt(request.get("id"));
 		Integer completed = Integer.parseInt(request.get("completed"));
-		System.out.println(id);
-		System.out.println(completed);
 		params.put("id",id);
 		params.put("completed",completed);
 		jdbc.update(TodoSqls.PUT_TODO, params);

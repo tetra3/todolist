@@ -1,8 +1,8 @@
 (function (window) {
 	'use strict';
+
 var count = 0;
 $(document).ready(function() {
-
     //List
     $.ajax({
     url: "/api/todos",
@@ -52,10 +52,6 @@ $(document).ready(function() {
             }
         }
     });
-
-
-
-
 });
 
 
@@ -80,6 +76,8 @@ $(document).on("click",".destroy",function() {
     });
 });
 
+
+//Clear Completed
 $(document).on("click",".clear-completed",function() {
     $.ajax({
         url: "/api/todos/all",
@@ -88,7 +86,7 @@ $(document).on("click",".clear-completed",function() {
         success:function(){
 
             $(".todo-list").children("li.completed").remove();
-
+            $(".toggle-all").prop("checked",false);
 
 
         },
@@ -99,7 +97,7 @@ $(document).on("click",".clear-completed",function() {
 })
 
 
-
+//PUT
 $(document).on("change",".toggle",function() {
         var here = $(this);
 
@@ -136,30 +134,10 @@ $(document).on("change",".toggle",function() {
 
              });
         }
-
-        // var h = $(document.body).find('.toggle:checked');
-        // console.log(h);
-        // $('.todo-count>strong').append(h);
-
-
-        // select ALL 구성
-        // var toggleCheckObjs = $(".toggle[type='checkbox']");
-        // console.log(toggleCheckObjs.length);
-        // console.log($(".toggle[type='checkbox']:checked").length);
-        // if( toggleCheckObjs.length === $(".toggle[type='checkbox']:checked").length ) {
-        //     console.log("hi");
-        //     $('.toggle-all').attr("checked",true);
-        // }
-        // else if ( $(".toggle[type='checkbox']:checked").length < 4 )
-        // {
-        //     $('.toggle-all').attr("checked",false);
-        // }
-
-
-
 });
 
 
+// SELECT ALL
 $(document).on("click",".toggle-all",function() {
     if( $('.toggle-all').prop("checked") ) {
         $('.toggle:not(:checked)').click()
@@ -168,6 +146,7 @@ $(document).on("click",".toggle-all",function() {
         $('.toggle').click();
     }
 });
+
 
 
 $(document).on("click","a[href='#/active']",function(evt) {
@@ -199,29 +178,6 @@ $(document).on("click","a[href='#/']",function(evt) {
     $('.toggle:checked').parents("li").show();
     $('.toggle:not(:checked)').parents("li").show();
 });
-
-
-// var x = document.getElementsByClassName("toggle");
-// var count = 0;
-// console.log(x);
-
-// var h = $('.toggle');
-// console.log(h);
-
-
-
-// var toggleCheckObjs = $(".toggle[type='checkbox']");
-// console.log(toggleCheckObjs.length);
-// console.log($(".toggle[type='checkbox']:checked").length);
-// if( toggleCheckObjs.length === $(".toggle[type='checkbox']:checked").length ) {
-//     console.log("hi");
-//     $('.toggle-all').attr("checked",true);
-// }
-// else if ( $(".toggle[type='checkbox']:checked").length < 4 )
-// {
-//     $('.toggle-all').attr("checked",false);
-// }
-
 
 
 })(window);

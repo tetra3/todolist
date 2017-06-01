@@ -15,4 +15,3 @@ public class TodoApplication extends WebMvcConfigurerAdapter {
 	
 	}
 }
-		
