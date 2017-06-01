@@ -70,7 +70,8 @@ $(document).on("click",".destroy",function() {
         success:function(){
 
             $this.parents("li").remove();
-
+            count = count - 1;
+            $('.todo-count>strong').text(count);
         },
         error:function() {
             console.log("error");
@@ -86,6 +87,8 @@ $(document).on("click",".clear-completed",function() {
         success:function(){
 
             $(".todo-list").children("li.completed").remove();
+
+
 
         },
         error:function() {
@@ -166,7 +169,8 @@ $(document).on("click",".toggle-all",function() {
 });
 
 
-$(document).on("click","a[href='#/active']",function() {
+$(document).on("click","a[href='#/active']",function(evt) {
+    evt.preventDefault();
     $("a[href='#/completed']").removeClass("selected");
     $("a[href='#/active']").addClass("selected");
     $("a[href='#/']").removeClass("selected");
@@ -175,7 +179,8 @@ $(document).on("click","a[href='#/active']",function() {
     $('.toggle:not(:checked)').parents("li").show();
 });
 
-$(document).on("click","a[href='#/completed']",function() {
+$(document).on("click","a[href='#/completed']",function(evt) {
+    evt.preventDefault();
     $("a[href='#/completed']").addClass("selected");
     $("a[href='#/active']").removeClass("selected");
     $("a[href='#/']").removeClass("selected");
@@ -184,7 +189,8 @@ $(document).on("click","a[href='#/completed']",function() {
     $('.toggle:not(:checked)').parents("li").hide();
 });
 
-$(document).on("click","a[href='#/']",function() {
+$(document).on("click","a[href='#/']",function(evt) {
+    evt.preventDefault();
     $("a[href='#/completed']").removeClass("selected");
     $("a[href='#/active']").removeClass("selected");
     $("a[href='#/']").addClass("selected");
