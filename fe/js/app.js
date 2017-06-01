@@ -18,8 +18,9 @@ $(document).ready(function() {
                 $('.todo-list').prepend("<li data-id="+result[index].id+"><div><input class='toggle' type='checkbox'></input><label>"+result[index].todo+"</label><button class='destroy'></button></div><input class='edit' value='Create a TodoMVC template'></input></li>");
                 count = count + 1;
             }
-            $('.todo-count>strong').text(count);
+
         }
+        $('.todo-count>strong').text(count);
 
        });
 
