@@ -58,7 +58,7 @@ public class TodoDao {
 	public void insertTodo(HttpServletRequest request) {
 		Map<String, String> params = new HashMap<>();
 		params.put("TODO", request.getParameter("todo") );
-		params.put("DATE", finalTime);
+//		params.put("DATE", finalTime);
 		jdbc.update(TodoSqls.INSERT_TODO, params);	
 		
 	}

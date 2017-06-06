@@ -8,7 +8,7 @@ public class TodoSqls {
 			"SELECT * FROM todo";
 	
 	static final String INSERT_TODO =
-			"INSERT INTO TODO VALUES(ID.nextval,:TODO,0,:DATE)";
+			"INSERT INTO TODO VALUES(null,:TODO,0,default)";
 
 	static final String PUT_TODO =
 			"UPDATE TODO SET COMPLETED =:completed WHERE ID=:id";

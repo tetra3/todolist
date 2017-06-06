@@ -30,13 +30,15 @@ public class TodoController {
 	
 	@GetMapping
 	List<Todo> readList() {
+		System.out.println("read");
 		return service.findAll();
 	}
 	
 	@PostMapping
 	void insertTodo(HttpServletRequest request) {
+		System.out.println("test insert");
 		service.insertTodo(request);
-		 
+		
 	}
 	
 	@DeleteMapping
