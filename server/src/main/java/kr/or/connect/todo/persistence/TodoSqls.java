@@ -5,7 +5,7 @@ public class TodoSqls {
 			"DELETE FROM todo WHERE ID=:id";
 	
 	static final String SELECT_ALL =
-			"SELECT * FROM todo";
+			"SELECT * FROM todo order by id";
 	
 	static final String INSERT_TODO =
 			"INSERT INTO todo VALUES(null,:TODO,0,default)";
