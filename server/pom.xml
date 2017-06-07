@@ -5,7 +5,7 @@
 	<groupId>kr.or.connnect.boostcamp</groupId>
 	<artifactId>todo-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>todo-server</name>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

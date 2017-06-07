@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 //@ComponentScan(basePackages = "kr.or.connect")
 public class TodoApplication extends WebMvcConfigurerAdapter {
 	public static void main(String[] args) {
+		
 		SpringApplication.run(TodoApplication.class, args);
 	
 	}
